@@ -8,7 +8,7 @@ spring:
     password: spring
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    # show-sql: true # 자동 생성된 쿼리를 보여주는 옵션
+    # show-sql: true  자동 생성된 쿼리를 보여주는 옵션
     # 방언 설정 -> 각 DB에 맞는 쿼리를 설정
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:

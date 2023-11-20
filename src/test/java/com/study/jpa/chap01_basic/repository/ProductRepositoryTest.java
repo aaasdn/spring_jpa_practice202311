@@ -78,7 +78,7 @@ class ProductRepositoryTest {
         productRepository.deleteById(id);
         //then
     }
-    
+
     @Test
     @DisplayName("상품 전체조회를 하면 상품의 개수가 4개여야 한다.")
     void testFindAll() {
@@ -92,7 +92,7 @@ class ProductRepositoryTest {
 
         assertEquals(4, products.size());
     }
-
+    
     @Test
     @DisplayName("3번 상품을 조회하면 상품명이 구두일 것이다.")
     void testFindOne() {
@@ -111,7 +111,7 @@ class ProductRepositoryTest {
 
         System.out.println("foundProduct = " + foundProduct);
     }
-
+    
     @Test
     @DisplayName("2번 상품의 이름과 가격을 변경해야 한다.")
     void testModify() {
@@ -137,11 +137,9 @@ class ProductRepositoryTest {
         Product p = product.get();
         assertEquals("짜장면", p.getName());
     }
-
-
-
-
-
+    
+    
+    
 
 }
 
