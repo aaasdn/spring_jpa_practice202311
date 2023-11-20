@@ -72,6 +72,35 @@ class StudentRepositoryTest {
         System.out.println("students.get(0) = " + students.get(0));
     }
 
+    @Test
+    @DisplayName("testFindByMajorContaining")
+    void testFindByMajorContaining() {
+        //given
+        String major = "수학";
+        //when
+        List<Student> students = studentRepository.findByMajorContaining(major);
+        //then
+        assertEquals(2, students.size());
+
+        System.out.println("\n\n\n");
+        students.forEach(System.out::println);
+        System.out.println("\n\n\n");
+    }
+
+    @Test
+    @DisplayName("testNativeSQL")
+    void testNativeSQL() {
+        //given
+        String name = "대길이";
+        //when
+        Student student = studentRepository.findNameWithSQL(name);
+        //then
+        assertEquals("한양도성", student.getCity());
+
+        System.out.println("\n\n\n");
+        System.out.println("student = " + student);
+        System.out.println("\n\n\n");
+    }
 
 }
 
