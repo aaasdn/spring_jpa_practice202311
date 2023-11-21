@@ -5,7 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 
 @Setter @Getter
-@ToString
+// jpa 연관관계 매핑에서 연관관계 데이터는 toString에서 제외해야 합니다.
+@ToString(exclude = {"department"})
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @AllArgsConstructor

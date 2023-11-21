@@ -25,7 +25,7 @@ class EmployeeRepositoryTest {
     @Autowired
     DepartmentRepository departmentRepository;
 
-    @BeforeEach
+//    @BeforeEach
     void bulkInsert() {
         Department d1 = Department.builder()
                 .name("영업부")
