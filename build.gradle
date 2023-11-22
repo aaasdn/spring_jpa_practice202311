@@ -35,6 +35,9 @@ dependencies {
 	// 입력값 검증 라이브러리
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
+	// api 사용 방법을 명세한 문서 라이브러리 (swagger)
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+
 }
 
 tasks.named('bootBuildImage') {

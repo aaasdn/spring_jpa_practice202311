@@ -44,8 +44,8 @@ public class PostService {
         // 게시물 정보를 DTO의 형태에 맞게 변환 (stream을 이용하여 객체마다 일괄 처리)
         List<PostDetailResponseDTO> detailList
                 =  postList.stream()
-                            .map(PostDetailResponseDTO::new)
-                            .collect(Collectors.toList());
+                .map(PostDetailResponseDTO::new)
+                .collect(Collectors.toList());
 
         // DB에서 조회한 정보를 JSON 형태에 맞는 DTO로 변환 -> PostListResponseDTO
         return PostListResponseDTO.builder()
@@ -57,15 +57,21 @@ public class PostService {
 
     public PostDetailResponseDTO getDetail(Long id) throws Exception {
 
-        Post postEntity = postRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException(id + "번 게시물이 존재하지 않습니다!"));
+        Post postEntity = getPost(id);
 
         return new PostDetailResponseDTO(postEntity);
 
     }
 
+    private Post getPost(Long id) {
+        return postRepository.findById(id)
+                .orElseThrow(
+                        () -> new RuntimeException(id + "번 게시물이 존재하지 않습니다!")
+                );
+    }
+
     public PostDetailResponseDTO insert(PostCreateDTO dto)
-        throws Exception {
+            throws Exception {
 
         // 게시물 저장 (아직 해시태그는 insert 되지 않음)
         Post saved = postRepository.save(dto.toEntity());
@@ -98,6 +104,27 @@ public class PostService {
 
 
         return new PostDetailResponseDTO(saved);
+    }
+
+    public PostDetailResponseDTO modify(PostModifyDTO dto) {
+
+        // 수정 전 데이터를 조회
+        Post postEntity = getPost(dto.getPostNo());
+
+        // 수정 시작
+        postEntity.setTitle(dto.getTitle());
+        postEntity.setContent(dto.getContent());
+
+        // 수정 완료
+        Post modifiedPost = postRepository.save(postEntity);
+
+        return new PostDetailResponseDTO(modifiedPost);
+    }
+
+    public void delete(Long id) throws Exception {
+
+        postRepository.deleteById(id);
+
     }
 }
 

@@ -38,7 +38,8 @@ public class Post {
     @UpdateTimestamp
     private LocalDateTime updateDate; // 수정시간
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", orphanRemoval = true) // 리스트의 해시태그에 고아객체들은 지워도 좋아.
+                                    // 단방향 이였으면 orphanRemoval = true 쓸필요 없음.
     @Builder.Default // 특정 필드를 직접 지정한 값으로 초기화 하는 것을 강제.
     private List<HashTag> hashTags = new ArrayList<>();
 
