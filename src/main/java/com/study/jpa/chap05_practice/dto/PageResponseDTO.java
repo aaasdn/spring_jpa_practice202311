@@ -19,11 +19,11 @@ public class PageResponseDTO {
 
     private int totalCount;
 
-    // 한 페이지에 배치할 페이지 수 (1 ~ 10 // 11 ~ 20)
+    // 한 페이지에 배치할 페이지 버튼 수 (1 ~ 10 // 11 ~ 20)
     private static final int PAGE_COUNT = 10;
 
     public PageResponseDTO(Page<Post> pageData) {
-        // 기존에 사용하셨던 PageCreateor랑 다를 게 없어요
+        // 기존에 사용하셨던 PageCreator랑 다를 게 없어요~
         // 매개값으로 전달된 Page 객체가 많은 정보를 제공하기 때문에 로직이 좀 더 간편해진 것 뿐입니다.
         this.totalCount = (int) pageData.getTotalElements();
         this.currentPage = pageData.getPageable().getPageNumber() + 1;
@@ -39,8 +39,6 @@ public class PageResponseDTO {
         this.next = endPage < realEnd;
     }
 }
-
-
 
 
 

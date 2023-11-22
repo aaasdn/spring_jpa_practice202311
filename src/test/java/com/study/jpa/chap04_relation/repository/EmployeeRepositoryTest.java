@@ -2,7 +2,6 @@ package com.study.jpa.chap04_relation.repository;
 
 import com.study.jpa.chap04_relation.entity.Department;
 import com.study.jpa.chap04_relation.entity.Employee;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Transactional
@@ -79,22 +76,20 @@ class EmployeeRepositoryTest {
         assertEquals("어피치", employee.getName());
     }
 
-        @Test
-        @DisplayName("부서 정보 조회")
-        void testFindDept() {
-            //given
-            Long id = 1L;
-            //when
-            Department department
-                    = departmentRepository.findById(id)
-                    .orElseThrow();
-            //then
-            System.out.println("\n\n\n");
-            System.out.println("department = " + department);
-            System.out.println("\n\n\n");
-        }
-
-
+    @Test
+    @DisplayName("부서 정보 조회")
+    void testFindDept() {
+        //given
+        Long id = 1L;
+        //when
+        Department department
+                = departmentRepository.findById(id)
+                .orElseThrow();
+        //then
+        System.out.println("\n\n\n");
+        System.out.println("department = " + department);
+        System.out.println("\n\n\n");
+    }
 
 }
 

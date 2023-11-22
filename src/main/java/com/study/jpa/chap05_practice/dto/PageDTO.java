@@ -2,7 +2,7 @@ package com.study.jpa.chap05_practice.dto;
 
 import lombok.*;
 
-@Setter @Getter
+@Getter @Setter
 @ToString @EqualsAndHashCode
 @AllArgsConstructor
 @Builder

@@ -2,7 +2,6 @@ package com.study.jpa.chap04_relation.repository;
 
 import com.study.jpa.chap04_relation.entity.Department;
 import com.study.jpa.chap04_relation.entity.Employee;
-import org.hibernate.boot.TempTableDdlTransactionHandling;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +10,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -27,7 +23,7 @@ class DepartmentRepositoryTest {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    // 엔터티들을 관리하는 역할을 수행하는 클래스 (영속성 컨텍스트를 관리함, Spring Data JPA에서만 사용하는 게 아님)
+    // 엔터티들을 관리하는 역할을 수행하는 클래스. (영속성 컨텍스트를 관리함, Spring Data JPA에서만 사용하는 게 x)
     // 영속성 컨텍스의 내의 내용들을 DB에 반영시키거나 비워내거나 수명을 관리할 수 있는 객체.
     @Autowired
     EntityManager entityManager;
@@ -82,8 +78,8 @@ class DepartmentRepositoryTest {
         employeeRepository.save(foundEmp);
 
         // 1번 -> 변경 감지(더티 체크) 후 변경된 내용을 DB에 즉시 반영하는 역할.
-//        entityManager.flush(); // DB로 밀어내기
-//        entityManager.clear(); // 영속성 컨텍스트 비우기 (비우지 않으면 컨텍스트 내의 정보를 참조하려 함.)
+        //entityManager.flush(); // DB로 밀어내기
+        //entityManager.clear(); // 영속성 컨텍스트 비우기 (비우지 않으면 컨텍스트 내의 정보를 참조하려 함.)
 
         //when
 
@@ -101,19 +97,16 @@ class DepartmentRepositoryTest {
     @Test
     @DisplayName("N+1 문제 발생 예시")
     void testNPlus1Ex() {
-        //given
         List<Department> departments = departmentRepository.findAll();
-        //when
 
         departments.forEach(dept -> {
-            System.out.println("\n\n============== 사원 리스트 =============");
+            System.out.println("\n\n========== 사원 리스트 ==========");
             List<Employee> employees = dept.getEmployees();
             System.out.println(employees);
 
             System.out.println("\n\n");
         });
 
-        //then
     }
 
     @Test
@@ -122,7 +115,7 @@ class DepartmentRepositoryTest {
         List<Department> departments = departmentRepository.findAllIncludesEmployees();
 
         departments.forEach(dept -> {
-            System.out.println("\n\n============== 사원 리스트 =============");
+            System.out.println("\n\n========== 사원 리스트 ==========");
             List<Employee> employees = dept.getEmployees();
             System.out.println(employees);
 
@@ -130,6 +123,9 @@ class DepartmentRepositoryTest {
         });
 
     }
+
+
+
 
 
 }
