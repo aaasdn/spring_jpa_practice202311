@@ -26,6 +26,9 @@ public class Post {
     @Column(nullable = false)
     private String writer; // 작성자
 
+    @Column(nullable = false)
+    private String title; // 제목
+
     private String content; // 내용
 
     @CreationTimestamp
